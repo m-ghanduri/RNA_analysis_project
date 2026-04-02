@@ -1,0 +1,7 @@
+#this command was for using STAR to create the genome index for the staph refseq genome. I used the gtf file associated that could be found here:
+#https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_045348275.1/
+#I decided to use STAR because it seems like a pretty good standard where the speed is pretty good and its performance for matching reads is pretty good in comparison to something like hisat2.
+#there is an article found in my zotero folder for this project that I used to guide that decision.
+
+STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../genome_index/ --genomeFastaFiles GCF_045348275.1_ASM4534827v1_genomic.fna --sjdbGTFfile GCA_045348275.1_ASM4534827v1_genomic.gtf --sjdbOverhang 149 --genomeSAindexNbases 9
+#all of the commands and their explanations can be found in the STAR manual. because I have a much smaller genome, I decided to use the option "--genomeSAindexNbases" and set it to 9.
