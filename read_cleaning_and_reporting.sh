@@ -39,9 +39,10 @@ fastp_cleaning () {
 #this function will do a fastq analysis on all of the cleaned and raw files
 #the approach here is to concatenate one big string made up of all the file names and then pass it on to fastqc
 fastqc_reporting () {
-	big_string = ''
-	for f in fastq_files; do big_string = $f" ../cleaned_up_fastp_files/cleaned_"$f' '$big_string ; done
-	echo $big_string
+        big_string=''
+        for f in "${fastq_files[@]}"; do big_string+="../cleaned_up_fastp_files/cleaned_$f $f " ; done
+        mkdir ../fastqc_files_all
+        fastqc $big_string -o ../fastqc_files_all
 }
 
 fastq_input
