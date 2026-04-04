@@ -3,5 +3,9 @@
 #I decided to use STAR because it seems like a pretty good standard where the speed is pretty good and its performance for matching reads is pretty good in comparison to something like hisat2.
 #there is an article found in my zotero folder for this project that I used to guide that decision.
 
+#produce the indexed genome directory
 STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../genome_index/ --genomeFastaFiles GCF_045348275.1_ASM4534827v1_genomic.fna --sjdbGTFfile GCA_045348275.1_ASM4534827v1_genomic.gtf --sjdbOverhang 149 --genomeSAindexNbases 9
 #all of the commands and their explanations can be found in the STAR manual. because I have a much smaller genome, I decided to use the option "--genomeSAindexNbases" and set it to 9.
+
+#test align reads for WT2 sample and output them into another folder 
+STAR --runThreadN 8 --genomeDir genome_index/ --readFilesIn ../cleaned_up_fastp_files/cleaned_SRR37195983_GSM9510831_WT2_Staphylococcus_aureus_RNA-Seq_1.fastq.gz ../cleaned_up_fastp_files/cleaned_SRR37195983_GSM9510831_WT2_Staphylococcus_aureus_RNA-Seq_2.fastq.gz --readFilesCommand zcat --outFileNamePrefix ../aligned_reads/
