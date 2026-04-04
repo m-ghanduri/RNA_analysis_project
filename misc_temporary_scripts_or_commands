@@ -9,3 +9,8 @@ STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../genome_index/ --geno
 
 #test align reads for WT2 sample and output them into another folder 
 STAR --runThreadN 8 --genomeDir genome_index/ --readFilesIn ../cleaned_up_fastp_files/cleaned_SRR37195983_GSM9510831_WT2_Staphylococcus_aureus_RNA-Seq_1.fastq.gz ../cleaned_up_fastp_files/cleaned_SRR37195983_GSM9510831_WT2_Staphylococcus_aureus_RNA-Seq_2.fastq.gz --readFilesCommand zcat --outFileNamePrefix ../aligned_reads/
+
+#after doing my alignments, I converted my SAM file into a BAM file and sorted it, in preparation to import it into R. Sorting helps with downstream stuff
+samtools view -b Aligned.out.sam > Aligned.out.bam
+samtools sort Aligned.out.bam
+#by the way I can pipe the bam output into sorting!!!
