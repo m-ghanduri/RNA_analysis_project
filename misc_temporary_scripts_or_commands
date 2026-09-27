@@ -14,3 +14,9 @@ STAR --runThreadN 8 --genomeDir genome_index/ --readFilesIn ../cleaned_up_fastp_
 samtools view -b Aligned.out.sam > Aligned.out.bam
 samtools sort Aligned.out.bam
 #by the way I can pipe the bam output into sorting!!!
+
+#I decided to just stick to what the original lab did so I can compare my outcomes and have a "guide"
+#The cleanup is still the same with the read_cleaning_and_reporting.sh script used to clean the files
+#however this is the temp command I used to make a reference genome for hisat2!!
+hisat2-build RNA_raw_data/ref_genome/GCF_045348275.1_ASM4534827v1_genomic.fna hisat_aligned_reads/S_aureus_ref_genome
+
