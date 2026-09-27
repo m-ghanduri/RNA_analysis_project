@@ -20,3 +20,12 @@ samtools sort Aligned.out.bam
 #however this is the temp command I used to make a reference genome for hisat2!!
 hisat2-build RNA_raw_data/ref_genome/GCF_045348275.1_ASM4534827v1_genomic.fna hisat_aligned_reads/S_aureus_ref_genome
 
+#then align I used:
+hisat2 -x hisat_aligned_reads/S_aureus_ref_genome/S_aureus_ref_genome \
+-1 cleaned_up_fastp_files/cleaned_SRR37195990_GSM9510828_EV2_Staphylococcus_aureus_RNA-Seq_1.fastq.gz \
+-2 cleaned_up_fastp_files/cleaned_SRR37195990_GSM9510828_EV2_Staphylococcus_aureus_RNA-Seq_2.fastq.gz \
+-S hisat_aligned_reads/aligned_EV2_reads.sam
+
+#then to convert from sam to bam and then to sort I used the two commands:
+samtools view -b *.sam -o aligned_EV2_reads.bam
+samtools sort -@ 2 aligned_EV2_reads.bam -o sorted_aligned_EV2_reads.bam #the -@ option is the flag for the number of threads to use
