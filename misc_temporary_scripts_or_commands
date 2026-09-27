@@ -29,3 +29,7 @@ hisat2 -x hisat_aligned_reads/S_aureus_ref_genome/S_aureus_ref_genome \
 #then to convert from sam to bam and then to sort I used the two commands:
 samtools view -b *.sam -o aligned_EV2_reads.bam
 samtools sort -@ 2 aligned_EV2_reads.bam -o sorted_aligned_EV2_reads.bam #the -@ option is the flag for the number of threads to use
+
+#to do the read quantification using subreads featurecounts:
+featureCounts -p --countReadPairs -T 2 -a RNA_raw_data/ref_genome/GCF_045348275.1_ASM4534827v1_genomic.gtf -Q 20 -o subread_quantification/EV2_count.txt hisat_aligned_reads/sorted_aligned_EV2_reads.bam
+#this outputs the count table for the paired end reads for EV2 per gene 
