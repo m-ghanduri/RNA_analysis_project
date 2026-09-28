@@ -1,0 +1,18 @@
+SAMPLES = ["WT1", "WT2", "WT3", "delsarA1", "delsarA2", "delsarA3", "EV1", "EV2", "EV3"]
+
+rule all:
+        input:
+                expand("/mnt/extra_harddrive/RNA_project/hisat_aligned_reads/aligned_{sample}_reads.sam", sa>
+
+rule Hisat2_mapping:
+        input:
+                fastq_gz1= "cleaned_up_fastp_files/cleaned_{sample}_1.fastq.gz",
+                fastq_gz2= "cleaned_up_fastp_files/cleaned_{sample}_2.fastq.gz"
+        output:
+                "/mnt/extra_harddrive/RNA_project/hisat_aligned_reads/aligned_{sample}_reads.sam"
+        shell:
+                "hisat2 -x hisat_aligned_reads/S_aureus_ref_genome/S_aureus_ref_genome "
+                "-1 {input.fastq_gz1} "
+                "-2 {input.fastq_gz2} "
+                "-S {output}"
+#more to come!
